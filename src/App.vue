@@ -39,7 +39,6 @@ export default {
     },
     updateTodo(updateTodo) {
       const id = updateTodo.id;
-      delete updateTodo.id;
       axios.put(`/todos/${id}`, {...updateTodo})
       // eslint-disable-next-line
       .catch(err => console.log(err));
