@@ -1,7 +1,7 @@
 <template>
-  <li v-bind:class="{'is-complete':todo.complete}">
+  <li v-bind:class="{'is-complete':todo.completed}">
     <p>
-      <input type="checkbox" v-bind:checked="todo.complete" v-on:change="toogleComplete" />
+      <input type="checkbox" v-bind:checked="todo.completed" v-on:change="toogleComplete" />
       {{todo.title}}
       <button @click="$emit('toogleRemove', todo.id)">remove</button>
     </p>
@@ -14,7 +14,8 @@
     props: ['todo'],
     methods: {
       toogleComplete(e) {
-        this.todo.complete = e.target.checked;
+        this.todo.completed = e.target.checked;
+        this.$emit('updateTodo', this.todo);
       }
     }
   }
