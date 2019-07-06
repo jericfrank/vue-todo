@@ -1,16 +1,19 @@
 <template>
   <div id="app">
+    <AddTodo v-on:submitTodo="submitTodo" />
     <Todos v-bind:todos="todos" v-on:toogleRemove="toogleRemove" />
   </div>
 </template>
 
 <script>
-import Todos from './components/Todos.vue';
+import Todos from './components/Todos';
+import AddTodo from './components/AddTodo';
 
 export default {
   name: 'app',
   components: {
-    Todos
+    Todos,
+    AddTodo
   },
   data() {
     return {
@@ -36,6 +39,9 @@ export default {
   methods: {
     toogleRemove(id) {
       this.todos = this.todos.filter(t => t.id !== id);
+    },
+    submitTodo(newTodo) {
+      this.todos = [...this.todos, newTodo];
     }
   }
 }
