@@ -1,20 +1,31 @@
 <template>
-  <li v-bind:class="{'is-complete':todo.completed}">
-    <p>
-      <input type="checkbox" v-bind:checked="todo.completed" v-on:change="toogleComplete" />
-      {{todo.title}}
-      <button @click="$emit('toogleRemove', todo.id)">remove</button>
-    </p>
-  </li>
+  <v-list-tile>
+    <v-list-tile-action>
+      <v-checkbox v-model="completed" v-on:change="toogleComplete"></v-checkbox>
+    </v-list-tile-action>
+
+    <v-list-tile-content>
+      <v-list-tile-title v-bind:class="{'is-complete':todo.completed}">{{todo.title}}</v-list-tile-title>
+    </v-list-tile-content>
+
+    <v-list-tile-action>
+      <v-icon @click="$emit('toogleRemove', todo.id)">delete</v-icon>
+    </v-list-tile-action>
+  </v-list-tile>
 </template>
 
 <script>
   export default {
     name: 'TodoItem',
     props: ['todo'],
+    data () {
+      return {
+        completed: this.todo.completed,
+      }
+    },
     methods: {
-      toogleComplete(e) {
-        this.todo.completed = e.target.checked;
+      toogleComplete() {
+        this.todo.completed = !this.todo.completed;
         this.$emit('updateTodo', this.todo);
       }
     }
@@ -24,5 +35,6 @@
 <style scoped>
   .is-complete {
     text-decoration: line-through;
+    color: green;
   }
 </style>

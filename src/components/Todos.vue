@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <h1>Todos:</h1>
-    <ul v-bind:key="todo.id" v-for="todo in todos">
+  <v-card>
+    <v-subheader>Todo list vue</v-subheader>
+    <v-list subheader two-line v-bind:key="todo.id" v-for="todo in todos">
       <TodoItem
-        v-bind:todo="todo"
+        :todo="todo"
         v-on:toogleRemove="$emit('toogleRemove', todo.id)"
         v-on:updateTodo="$emit('updateTodo', todo)"
       />
-    </ul>
-  </div>
+    </v-list>
+  </v-card>
 </template>
 
 <script>

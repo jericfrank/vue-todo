@@ -1,7 +1,12 @@
 <template>
-  <form @submit="onSubmit">
-    <input type="text" name="title" v-model="title" placeholder="Add todo" />
-  </form>
+  <v-form @submit="onSubmit">
+    <v-text-field
+      v-model="title"
+      label="Write new todo.."
+      solo
+      required
+    />
+  </v-form>
 </template>
 
 <script>
