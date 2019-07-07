@@ -10,23 +10,22 @@
 </template>
 
 <script>
-export default {
-  name: 'AddTodo',
-  data() {
-    return {
-      title: ''
-    }
-  },
-  methods: {
-    onSubmit(e) {
-      e.preventDefault();
-      const newTodo = {
-        title: this.title,
-        complete: false,
-      };
-      this.$emit('submitTodo', newTodo);
-      this.title = '';
+  import { mapActions } from 'vuex';
+
+  export default {
+    name: 'AddTodo',
+    data() {
+      return {
+        title: ''
+      }
+    },
+    methods: {
+      ...mapActions(['addTodo']),
+      onSubmit(e) {
+        e.preventDefault();
+        this.addTodo(this.title);
+        this.title = '';
+      }
     }
   }
-}
 </script>

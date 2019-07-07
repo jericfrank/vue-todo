@@ -1,7 +1,7 @@
 <template>
   <v-list-tile>
     <v-list-tile-action>
-      <v-checkbox v-model="completed" v-on:change="toogleComplete"></v-checkbox>
+      <v-checkbox v-model="checked" v-on:change="toogleComplete"></v-checkbox>
     </v-list-tile-action>
 
     <v-list-tile-content>
@@ -18,15 +18,20 @@
   export default {
     name: 'TodoItem',
     props: ['todo'],
-    data () {
+    data() {
       return {
-        completed: this.todo.completed,
+        checked: this.todo.completed
       }
     },
     methods: {
       toogleComplete() {
-        this.todo.completed = !this.todo.completed;
-        this.$emit('updateTodo', this.todo);
+        const { id, title, completed } = this.todo;
+        const updTodo = {
+          id,
+          title,
+          completed: !completed
+        };
+        this.$emit('completedTodo', updTodo);
       }
     }
   }
